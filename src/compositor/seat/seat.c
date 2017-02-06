@@ -92,7 +92,7 @@ static void
 wl_seat_bind(struct wl_client *client, void *data, uint32_t version, uint32_t id)
 {
    struct wl_resource *resource;
-   if (!(resource = wl_resource_create_checked(client, &wl_seat_interface, version, 5, id)))
+   if (!(resource = wl_resource_create_checked(client, &wl_seat_interface, version, 4, id)))
       return;
 
    wl_resource_set_implementation(resource, &wl_seat_implementation, data, NULL);
@@ -320,7 +320,7 @@ wlc_seat(struct wlc_seat *seat)
        !wlc_touch(&seat->touch))
       goto fail;
 
-   if (!(seat->wl.seat = wl_global_create(wlc_display(), &wl_seat_interface, 4, seat, wl_seat_bind)))
+   if (!(seat->wl.seat = wl_global_create(wlc_display(), &wl_seat_interface, 5, seat, wl_seat_bind)))
       goto shell_interface_fail;
 
    return seat;
